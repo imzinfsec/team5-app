@@ -88,18 +88,18 @@ jobs:
           cache-to: type=gha,mode=max       # 캐시 저장 (max = 모든 레이어)
 
       # 9. Config 레포 이미지 태그 업데이트
-      - name: Update image tag in config repo
-        env:
-          GH_TOKEN: ${{ secrets.CONFIG_REPO_PAT }}
-        run: |
-          git clone https://x-access-token:$GH_TOKEN@github.com/team5/petcarelog-config.git
-          cd petcarelog-config
+      # - name: Update image tag in config repo
+      #   env:
+      #     GH_TOKEN: ${{ secrets.CONFIG_REPO_PAT }}
+      #   run: |
+      #     git clone https://x-access-token:$GH_TOKEN@github.com/team5/petcarelog-config.git
+      #     cd petcarelog-config
 
-          sed -i "s|image:.*|image: ${{ steps.tag.outputs.uri }}|g" \
-            apps/petcarelog/overlays/dev/patch-deployment.yaml
+      #     sed -i "s|image:.*|image: ${{ steps.tag.outputs.uri }}|g" \
+      #       apps/petcarelog/overlays/dev/patch-deployment.yaml
 
-          git config user.email "github-actions@github.com"
-          git config user.name "github-actions"
-          git add .
-          git commit -m "chore(image): bump petcarelog to ${{ steps.tag.outputs.value }}"
-          git push
+      #     git config user.email "github-actions@github.com"
+      #     git config user.name "github-actions"
+      #     git add .
+      #     git commit -m "chore(image): bump petcarelog to ${{ steps.tag.outputs.value }}"
+      #     git push

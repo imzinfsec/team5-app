@@ -1,0 +1,18 @@
+:root {
+      --bg: #f8f6f2;
+      --paper: #fffdf9;
+      --soft: #efebe4;
+      --text: #30343b;
+      --sub: #8d95a1;
+      --line: #ebe6de;
+      --green: #8fb57f;
+      --green-dark: #5c7b54;
+      --blue: #6f9ed8;
+      --pink: #de8fa2;
+      --purple: #9168ca;
+      --yellow: #dcb85a;
+      --brown: #a77964;
+      --shadow: 0 14px 34px rgba(45, 41, 36, 0.08);
+      --radius: 26px;
+      --safe: env(safe-area-inset-bottom, 0px);
+    }

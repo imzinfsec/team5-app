@@ -1,0 +1,58 @@
+.profile-card { padding: 15px; display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }
+    .avatar {
+      width: 66px;
+      height: 66px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #f0ede8, #ddd7cf);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 950;
+    }
+    .profile-card h2 { margin: 0; font-size: 21px; letter-spacing: -0.055em; }
+    .profile-card p { margin: 6px 0 0; color: var(--sub); font-size: 13px; }
+    .profile-edit {
+      margin-left: auto;
+      height: 36px;
+      padding: 0 13px;
+      border-radius: 999px;
+      background: #f4eee7;
+      color: #68707c;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .pet-switch { display: flex; gap: 10px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; }
+    .pet-switch::-webkit-scrollbar { display: none; }
+    .pet-card {
+      min-width: 78px;
+      padding: 10px 8px;
+      border-radius: 22px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      display: grid;
+      justify-items: center;
+      gap: 7px;
+      color: #59616c;
+      font-size: 13px;
+      font-weight: 850;
+    }
+    .pet-card.active { border-color: var(--pink); color: var(--text); box-shadow: 0 8px 18px rgba(45,41,36,0.06); }
+    .pet-card .avatar { width: 48px; height: 48px; border-radius: 18px; font-size: 17px; }
+
+    .menu { overflow: hidden; }
+    .menu button {
+      width: 100%;
+      min-height: 58px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      text-align: left;
+    }
+    .menu button:last-child { border-bottom: 0; }
+    .menu-left { display: flex; align-items: center; gap: 12px; }
+    .menu-icon { width: 34px; height: 34px; border-radius: 12px; --c: var(--green-dark); --t: #eef6e8; }

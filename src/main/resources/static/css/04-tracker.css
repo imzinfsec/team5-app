@@ -1,0 +1,27 @@
+.tracker-only {
+      margin-top: 110px;
+    }
+    .tracker-hero {
+      min-height: 238px;
+      padding: 20px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(143,181,127,0.23), transparent 36%),
+        linear-gradient(145deg, #fffdf9, #e8dfd4);
+      position: relative;
+      overflow: hidden;
+    }
+    .tracker-hero h2 { margin: 0; font-size: 25px; letter-spacing: -0.055em; }
+    .tracker-hero p { margin: 7px 0 18px; color: var(--sub); font-size: 13px; }
+    .tracker-sheet {
+      background: rgba(255,253,249,0.88);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 14px 32px rgba(45,41,36,0.11);
+      backdrop-filter: blur(8px);
+    }
+    .mini-week { display: grid; grid-template-columns: 64px repeat(7, 1fr); gap: 5px; align-items: center; font-size: 10px; color: #626b75; }
+    .mini-week b { color: var(--green-dark); text-align: center; }
+    .mini-week span:first-child { font-weight: 750; }
+    .box { height: 18px; border-radius: 6px; background: #eef1ea; border: 1px solid #dbe6d5; }
+    .box.done { background: #bcd5b2; }

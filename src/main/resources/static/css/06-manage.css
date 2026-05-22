@@ -1,0 +1,19 @@
+.category-section { margin-bottom: 24px; }
+    .category-section h3 { margin: 0 0 10px; font-size: 16px; letter-spacing: -0.045em; }
+    .preset-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .preset-tile {
+      min-width: 0;
+      border-radius: 18px;
+      padding: 8px 5px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #66707a;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+    .preset-tile.active { background: #edf6e8; border-color: #b9d8aa; color: var(--green-dark); }
+    .preset-tile .circle { width: 36px; height: 36px; border-radius: 13px; display: grid; place-items: center; color: var(--c); background: var(--t); }

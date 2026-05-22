@@ -11,7 +11,7 @@ permissions:
 
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
-  ECR_REPOSITORY: ${{ vars.ECR_DEV_REPOSITORY }}
+  ECR_DEV_REPOSITORY: ${{ vars.ECR_DEV_REPOSITORY }}
 
 jobs:
   build-and-push:

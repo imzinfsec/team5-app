@@ -268,3 +268,6 @@ $RECYCLE.BIN/
 # STS / Eclipse Language Server logs
 # =========================
 languageServers-log/
+
+
+src/main/resources/application-local.yaml

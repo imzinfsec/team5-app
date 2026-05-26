@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>PetCareLog 로그인</title>
+</head>
+<body>
+    <h1>로그인</h1>
+
+    <form action="/login" method="post">
+        <div>
+            <label>이메일</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <div>
+            <label>비밀번호</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <button type="submit">로그인</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const message = document.getElementById('message');
+
+        if (params.get('error') === 'true') {
+            message.textContent = '이메일 또는 비밀번호가 올바르지 않습니다.';
+        }
+
+        if (params.get('logout') === 'true') {
+            message.textContent = '로그아웃되었습니다.';
+        }
+    </script>
+</body>
+</html>

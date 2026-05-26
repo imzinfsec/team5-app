@@ -1,9 +1,11 @@
 package com.example.petcarelog.carelog;
 
+import com.example.petcarelog.user.CurrentUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -14,13 +16,16 @@ import java.util.List;
 public class CareLogController {
 
     private final CareLogService careLogService;
+    private final CurrentUserService currentUserService;
 
     @PostMapping("/api/pets/{petId}/care-logs/quick")
     public CareLogResponse createQuick(
+            Authentication authentication,
             @PathVariable Long petId,
             @Valid @RequestBody CareLogQuickCreateRequest request
     ) {
-        return careLogService.createQuick(petId, request);
+        Long userId = currentUserService.getCurrentUserId(authentication);
+        return careLogService.createQuick(userId, petId, request);
     }
 
     @GetMapping("/api/pets/{petId}/care-logs")
@@ -49,7 +54,7 @@ public class CareLogController {
         careLogService.delete(careLogId);
         return ResponseEntity.noContent().build();
     }
-    
+
     @GetMapping("/api/pets/{petId}/care-logs/dates")
     public List<LocalDate> findRecordedDates(
             @PathVariable Long petId,

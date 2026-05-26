@@ -20,7 +20,7 @@ public class CareLogService {
     private final PresetRepository presetRepository;
 
     @Transactional
-    public CareLogResponse createQuick(Long petId, CareLogQuickCreateRequest request) {
+    public CareLogResponse createQuick(Long userId, Long petId, CareLogQuickCreateRequest request) {
         petRepository.findById(petId)
                 .orElseThrow(() -> new IllegalArgumentException("반려동물을 찾을 수 없습니다. petId=" + petId));
 
@@ -34,7 +34,7 @@ public class CareLogService {
         CareLog careLog = new CareLog(
                 petId,
                 preset.getId(),
-                request.userId(),
+                userId,
                 preset.getName(),
                 preset.getCategory(),
                 preset.getIcon(),
@@ -46,7 +46,7 @@ public class CareLogService {
         CareLog savedCareLog = careLogRepository.save(careLog);
         return CareLogResponse.from(savedCareLog);
     }
-
+    
     @Transactional(readOnly = true)
     public List<CareLogResponse> findByDate(Long petId, LocalDate date) {
         LocalDateTime start = date.atStartOfDay();

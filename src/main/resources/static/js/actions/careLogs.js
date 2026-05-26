@@ -23,7 +23,6 @@ function addLogFromPreset(id) {
   api(`/pets/${state.currentPetId}/care-logs/quick`, {
     method: 'POST',
     body: JSON.stringify({
-      userId: 1,
       presetId: p.id,
       recordedAt
     })

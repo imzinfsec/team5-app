@@ -60,7 +60,6 @@ document.querySelector('#saveTrackerItems').onclick = async () => {
   const result = await api('/presets/tracking', {
     method: 'PUT',
     body: JSON.stringify({
-      userId: 1,
       presetIds
     })
   });
@@ -185,14 +184,13 @@ document.querySelector('#savePet').onclick = async () => {
 
   if (state.editingPetId) {
     const updated = await api(`/pets/${state.editingPetId}`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        userId: 1,
-        name,
-        species,
-        birthDate: birth === 'unknown' ? null : birth
-      })
-    });
+	  method: 'PUT',
+	  body: JSON.stringify({
+	    name,
+	    species,
+	    birthDate: birth === 'unknown' ? null : birth
+	  })
+	});
 
     if (!updated) {
       alert('반려동물 수정에 실패했어요. 서버 로그를 확인해 주세요.');
@@ -210,14 +208,13 @@ document.querySelector('#savePet').onclick = async () => {
     }
   } else {
     const created = await api('/pets', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: 1,
-        name,
-        species,
-        birthDate: birth === 'unknown' ? null : birth
-      })
-    });
+	  method: 'POST',
+	  body: JSON.stringify({
+	    name,
+	    species,
+	    birthDate: birth === 'unknown' ? null : birth
+	  })
+	});
 
     if (!created) {
       alert('반려동물 추가에 실패했어요. 서버 로그를 확인해 주세요.');

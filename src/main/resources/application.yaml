@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: petcarelog
+    
+  profiles:
+    active: local
 
   datasource:
     url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8

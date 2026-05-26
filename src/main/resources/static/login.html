@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCareLog 로그인</title>
+
+    <link rel="stylesheet" href="./css/00-tokens.css">
+    <link rel="stylesheet" href="./css/01-base.css">
+    <link rel="stylesheet" href="./css/10-auth.css">
+</head>
+<body>
+    <main class="auth-page">
+        <section class="auth-card">
+            <div class="auth-brand">
+                <div class="auth-logo">🐾</div>
+                <h1>Pet Care Log</h1>
+                <p>오늘의 반려동물 돌봄을 기록해요</p>
+            </div>
+
+            <form class="auth-form" action="/login" method="post">
+                <div class="auth-field">
+                    <label for="email">이메일</label>
+                    <input id="email" type="email" name="email" placeholder="test@test.com" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="password">비밀번호</label>
+                    <input id="password" type="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                </div>
+
+                <button class="auth-submit" type="submit">로그인</button>
+            </form>
+
+            <p class="auth-link">
+                계정이 없나요?
+                <a href="/signup.html">회원가입</a>
+            </p>
+
+            <p id="message" class="auth-message"></p>
+        </section>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const message = document.getElementById('message');
+
+        if (params.get('error') === 'true') {
+            message.textContent = '이메일 또는 비밀번호가 올바르지 않습니다.';
+        }
+
+        if (params.get('logout') === 'true') {
+            message.textContent = '로그아웃되었습니다.';
+            message.classList.add('success');
+        }
+
+        if (params.get('signup') === 'true') {
+            message.textContent = '회원가입이 완료되었습니다. 로그인해 주세요.';
+            message.classList.add('success');
+        }
+    </script>
+</body>
+</html>

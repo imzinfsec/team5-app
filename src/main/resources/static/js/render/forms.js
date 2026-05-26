@@ -83,7 +83,6 @@ async function savePreset() {
   const name = document.querySelector('#presetName').value.trim() || '새 프리셋';
 
   const body = {
-    userId: 1,
     name,
     category: categoryApi(state.selectedCategory),
     icon: iconApi[state.selectedIcon] || state.selectedIcon,

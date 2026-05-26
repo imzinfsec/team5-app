@@ -7,7 +7,8 @@ public record PetResponse(
         Long userId,
         String name,
         String species,
-        LocalDate birthDate
+        LocalDate birthDate,
+        String imageUrl
 ) {
     public static PetResponse from(Pet pet) {
         return new PetResponse(
@@ -15,7 +16,8 @@ public record PetResponse(
                 pet.getUserId(),
                 pet.getName(),
                 pet.getSpecies(),
-                pet.getBirthDate()
+                pet.getBirthDate(),
+                pet.getImageUrl()
         );
     }
 }

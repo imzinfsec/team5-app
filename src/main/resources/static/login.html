@@ -21,6 +21,11 @@
         <button type="submit">로그인</button>
     </form>
 
+    <p>
+        계정이 없나요?
+        <a href="/signup.html">회원가입</a>
+    </p>
+
     <p id="message"></p>
 
     <script>
@@ -33,6 +38,10 @@
 
         if (params.get('logout') === 'true') {
             message.textContent = '로그아웃되었습니다.';
+        }
+
+        if (params.get('signup') === 'true') {
+            message.textContent = '회원가입이 완료되었습니다. 로그인해 주세요.';
         }
     </script>
 </body>

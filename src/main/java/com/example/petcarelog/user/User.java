@@ -1,6 +1,5 @@
 package com.example.petcarelog.user;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +33,15 @@ public class User {
 
     @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
-    
-    
-    
+
+    public static User create(String email, String password, String nickname, String role) {
+        User user = new User();
+        user.email = email;
+        user.password = password;
+        user.nickname = nickname;
+        user.role = role;
+        return user;
+    }
 }
 
 

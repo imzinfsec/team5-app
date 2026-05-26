@@ -2,33 +2,48 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetCareLog 회원가입</title>
+
+    <link rel="stylesheet" href="./css/00-tokens.css">
+    <link rel="stylesheet" href="./css/01-base.css">
+    <link rel="stylesheet" href="./css/10-auth.css">
 </head>
 <body>
-    <h1>회원가입</h1>
+    <main class="auth-page">
+        <section class="auth-card">
+            <a class="auth-back" href="/login.html">‹ 로그인으로</a>
 
-    <form action="/signup" method="post">
-        <div>
-            <label>이메일</label>
-            <input type="email" name="email" required>
-        </div>
+            <div class="auth-brand">
+                <div class="auth-logo">🐶</div>
+                <h1>회원가입</h1>
+                <p>반려동물의 하루를 함께 기록해요</p>
+            </div>
 
-        <div>
-            <label>비밀번호</label>
-            <input type="password" name="password" required minlength="4">
-        </div>
+            <form class="auth-form" action="/signup" method="post">
+                <div class="auth-field">
+                    <label for="email">이메일</label>
+                    <input id="email" type="email" name="email" placeholder="email@example.com" required>
+                </div>
 
-        <div>
-            <label>닉네임</label>
-            <input type="text" name="nickname" required>
-        </div>
+                <div class="auth-field">
+                    <label for="password">비밀번호</label>
+                    <input id="password" type="password" name="password" placeholder="4자 이상 입력하세요" minlength="4" required>
+                </div>
 
-        <button type="submit">가입하기</button>
-    </form>
+                <div class="auth-field">
+                    <label for="nickname">닉네임</label>
+                    <input id="nickname" type="text" name="nickname" placeholder="예: 보호자" required>
+                </div>
 
-    <p>
-        이미 계정이 있나요?
-        <a href="/login.html">로그인</a>
-    </p>
+                <button class="auth-submit" type="submit">가입하기</button>
+            </form>
+
+            <p class="auth-link">
+                이미 계정이 있나요?
+                <a href="/login.html">로그인</a>
+            </p>
+        </section>
+    </main>
 </body>
 </html>

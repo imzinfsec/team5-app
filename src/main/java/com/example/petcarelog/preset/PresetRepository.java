@@ -25,4 +25,6 @@ public interface PresetRepository extends JpaRepository<CarePreset, Long> {
         order by p.sortOrder asc, p.id asc
     """)
     List<CarePreset> findAvailablePresetsByCategory(Long userId, String category);
+
+	boolean existsByDefaultPresetTrue();
 }

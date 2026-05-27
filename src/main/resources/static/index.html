@@ -19,6 +19,8 @@
 
 <body>
   <main class="app">
+
+    <!-- 홈 화면 -->
     <section class="page active" id="home">
       <div class="top">
         <div class="title">
@@ -58,6 +60,7 @@
       <div class="timeline card" id="timeline"></div>
     </section>
 
+    <!-- 트래커 화면 -->
     <section class="page" id="tracker">
       <div class="top">
         <div class="title">
@@ -65,7 +68,6 @@
           <p id="trackerRange">05.18 - 05.24</p>
         </div>
       </div>
-
       <div class="tracker-hero card tracker-only">
 		  <h2 id="trackerPetTitle">밥이 루틴</h2>
 		  <p>
@@ -78,6 +80,7 @@
 	</div>
     </section>
 
+    <!-- 관리 화면 -->
     <section class="page" id="settings">
       <div class="top">
         <div class="title">
@@ -89,9 +92,7 @@
           <button class="text-btn" type="submit">로그아웃</button>
         </form>
       </div>
-
       <div class="profile-card card" id="profileCard"></div>
-
       <div class="menu card">
         <button id="openPetAdd">
           <span class="menu-left"><span class="menu-icon">🐾</span>반려동물 추가</span>
@@ -112,10 +113,11 @@
       <div class="section-title">
         <span>내 반려동물 기록집</span>
       </div>
-
+      <div class="section-title"><span>내 반려동물 기록집</span></div>
       <div class="pet-switch" id="petSwitch"></div>
     </section>
 
+    <!-- 프리셋 관리 -->
     <section class="page" id="presetManage">
       <div class="top">
         <button class="back-btn" data-go="settings">‹</button>
@@ -129,6 +131,7 @@
       <div id="presetManageList"></div>
     </section>
 
+    <!-- 트래커 관리 -->
     <section class="page" id="trackerManage">
       <div class="top">
         <button class="back-btn" data-go="settings">‹</button>
@@ -142,6 +145,7 @@
       <div id="trackerManageList"></div>
     </section>
 
+    <!-- 프리셋 폼 -->
     <section class="page" id="presetForm">
       <div class="top">
         <button class="back-btn" data-go="presetManage">‹</button>
@@ -176,6 +180,7 @@
       </div>
     </section>
 
+    <!-- 반려동물 폼 (이미지 업로드 추가) -->
     <section class="page" id="petForm">
       <div class="top">
         <button class="back-btn" data-go="settings">‹</button>
@@ -187,6 +192,22 @@
       </div>
 
       <div class="form-card card">
+
+        <!-- 프로필 이미지 업로드 -->
+        <div class="field">
+          <label>프로필 사진</label>
+          <div class="pet-img-upload" id="petImgUploadArea">
+            <img id="petImgPreview" src="" alt="프로필 이미지" style="display:none;" />
+            <div class="pet-img-placeholder" id="petImgPlaceholder">
+              <span>🐾</span>
+              <p>사진 추가</p>
+            </div>
+            <input type="file" id="petImageInput" accept="image/*" style="display:none;" />
+          </div>
+          <button class="img-upload-btn" id="petImgUploadBtn">📷 사진 선택</button>
+        </div>
+
+        <div class="field"><label>이름</label><input class="input" id="petName" placeholder="예: 밥이" /></div>
         <div class="field">
           <label>이름</label>
           <input class="input" id="petName" placeholder="예: 밥이" />
@@ -217,6 +238,7 @@
       </div>
     </section>
 
+    <!-- 하단 네비게이션 -->
     <nav class="bottom-nav" id="bottomNav">
       <button class="nav active" data-go="home" aria-label="홈">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -242,6 +264,7 @@
       </button>
     </nav>
 
+    <!-- 기록 상세 모달 -->
     <div class="sheet-bg" id="logSheet">
       <div class="sheet">
         <div class="top">
@@ -270,6 +293,7 @@
         </div>
       </div>
     </div>
+
   </main>
 
   <script src="./js/data/constants.js"></script>
@@ -284,5 +308,29 @@
   <script src="./js/core/bootstrap.js"></script>
   <script src="./js/core/events.js"></script>
   <script src="./js/main.js"></script>
+
+  <!-- 이미지 업로드 인터랙션 -->
+  <script>
+    const petImgUploadBtn = document.getElementById('petImgUploadBtn');
+    const petImageInput = document.getElementById('petImageInput');
+    const petImgPreview = document.getElementById('petImgPreview');
+    const petImgPlaceholder = document.getElementById('petImgPlaceholder');
+    const petImgUploadArea = document.getElementById('petImgUploadArea');
+
+    petImgUploadBtn.addEventListener('click', () => petImageInput.click());
+    petImgUploadArea.addEventListener('click', () => petImageInput.click());
+
+    petImageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        petImgPreview.src = ev.target.result;
+        petImgPreview.style.display = 'block';
+        petImgPlaceholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
 </body>
 </html>

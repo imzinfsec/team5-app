@@ -5,7 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -42,6 +42,21 @@ public class PetController {
             @Valid @RequestBody PetCreateRequest request
     ) {
         return petService.update(petId, request);
+    }
+
+    // 이미지 업로드 API 추가
+    @PostMapping("/{petId}/image")
+    public PetResponse uploadImage(
+            @PathVariable Long petId,
+            @RequestParam("image") MultipartFile image
+    ) {
+        return petService.uploadImage(petId, image);
+    }
+
+    // 이미지 삭제 API 추가
+    @DeleteMapping("/{petId}/image")
+    public PetResponse deleteImage(@PathVariable Long petId) {
+        return petService.deleteImage(petId);
     }
 
     @DeleteMapping("/{petId}")

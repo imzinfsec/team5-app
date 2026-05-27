@@ -272,6 +272,7 @@ languageServers-log/
 
 src/main/resources/application-local.yaml
 
+uploads/
 # =========================
 # Local Database (H2 Database)
 # =========================

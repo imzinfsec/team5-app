@@ -10,8 +10,12 @@ function renderSettings() {
       </div>
     `;
   } else {
+    const avatarContent = currentPet.imageUrl
+      ? `<img src="${currentPet.imageUrl}" alt="${currentPet.name}" />`
+      : currentPet.name.slice(0, 2);
+
     document.querySelector('#profileCard').innerHTML = `
-      <div class="avatar">${currentPet.name.slice(0, 2)}</div>
+      <div class="avatar">${avatarContent}</div>
       <div>
         <h2>${currentPet.name} <span style="color:var(--pink)">♥</span></h2>
         <p>${currentPet.species} · ${currentPet.birth || 'unknown'}</p>
@@ -24,20 +28,24 @@ function renderSettings() {
     };
   }
 
-  document.querySelector('#petSwitch').innerHTML = state.pets.map(p => `
-    <button class="pet-card ${p.id === state.currentPetId ? 'active' : ''}" data-id="${p.id}">
-      <span class="avatar">${p.name.slice(0, 2)}</span>
-      <span>${p.name}</span>
-    </button>
-  `).join('');
+  document.querySelector('#petSwitch').innerHTML = state.pets.map(p => {
+    const avatarContent = p.imageUrl
+      ? `<img src="${p.imageUrl}" alt="${p.name}" />`
+      : p.name.slice(0, 2);
+
+    return `
+      <button class="pet-card ${p.id === state.currentPetId ? 'active' : ''}" data-id="${p.id}">
+        <span class="avatar">${avatarContent}</span>
+        <span>${p.name}</span>
+      </button>
+    `;
+  }).join('');
 
   document.querySelectorAll('.pet-card').forEach(button => {
     button.onclick = async () => {
       state.currentPetId = Number(button.dataset.id);
-
       await loadLogsForSelectedDate();
       await loadWeekLogsForTracker();
-
       show('settings');
     };
   });
@@ -46,7 +54,6 @@ function renderSettings() {
 function renderPresetManage() {
   document.querySelector('#presetManageList').innerHTML = categories.map(cat => {
     const list = state.presets.filter(p => p.category === cat.key);
-
     if (!list.length) return '';
 
     return `
@@ -55,7 +62,6 @@ function renderPresetManage() {
         <div class="preset-grid">
           ${list.map(p => {
             const cc = colors(p.category);
-
             return `
               <button class="preset-tile" data-id="${p.id}">
                 <span class="circle" style="--c:${cc.c};--t:${cc.t}">
@@ -78,7 +84,6 @@ function renderPresetManage() {
 function renderTrackerManage() {
   document.querySelector('#trackerManageList').innerHTML = categories.map(cat => {
     const list = state.presets.filter(p => p.category === cat.key);
-
     if (!list.length) return '';
 
     return `
@@ -87,7 +92,6 @@ function renderTrackerManage() {
         <div class="preset-grid">
           ${list.map(p => {
             const cc = colors(p.category);
-
             return `
               <button class="preset-tile ${p.tracked ? 'active' : ''}" data-id="${p.id}">
                 <span class="circle" style="--c:${cc.c};--t:${cc.t}">
@@ -105,11 +109,8 @@ function renderTrackerManage() {
   document.querySelectorAll('#trackerManageList .preset-tile').forEach(button => {
     button.onclick = () => {
       const preset = state.presets.find(p => p.id === Number(button.dataset.id));
-
       if (!preset) return;
-
       preset.tracked = !preset.tracked;
-
       renderTrackerManage();
     };
   });

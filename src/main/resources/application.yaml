@@ -41,10 +41,10 @@ spring:
       max-request-size: 20MB
 
 aws:
-  region: ${AWS_REGION:ap-northeast-2}
+  region: ${AWS_REGION}
   s3:
     bucket: ${S3_BUCKET_NAME}
-    pet-image-prefix: ${S3_PET_IMAGE_PREFIX:pets}
+    pet-image-prefix: ${S3_PET_IMAGE_PREFIX}
 
 management:
   endpoints:

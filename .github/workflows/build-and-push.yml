@@ -13,6 +13,10 @@ env:
   AWS_REGION: ${{ vars.AWS_REGION }}
   ECR_PROD_REPOSITORY: ${{ vars.ECR_PROD_REPOSITORY }}
 
+  CONFIG_REPO: CLD-05/team5-config
+  CONFIG_REPO_BRANCH: main
+  PROD_MANIFEST_PATH: apps/petcarelog/overlays/prod/patch-deployment.yaml
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -25,7 +29,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_PROD_ARN }}
-          aws-region : ${{ env.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
           retry-max-attempts: 1
 
       - name: Login to Amazon ECR
@@ -34,7 +38,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/$ECR_PROD_REPOSITORY
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_PROD_REPOSITORY }}
+
           docker build \
             --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
             --build-arg GIT_SHA=${{ github.sha }} \
@@ -44,6 +49,38 @@ jobs:
 
       - name: Push Docker image
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/$ECR_PROD_REPOSITORY
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_PROD_REPOSITORY }}
+
           docker push $IMAGE_URI:${{ github.sha }}
           docker push $IMAGE_URI:latest
+
+      - name: Checkout config repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CONFIG_REPO }}
+          ref: ${{ env.CONFIG_REPO_BRANCH }}
+          token: ${{ secrets.CONFIG_REPO_TOKEN }}
+          path: team5-config
+
+      - name: Update prod image tag in config repo
+        run: |
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_PROD_REPOSITORY }}:${{ github.sha }}
+
+          cd team5-config
+
+          sed -i "s|image: .*team5-petcarelog-prod:.*|image: ${IMAGE_URI}|g" ${{ env.PROD_MANIFEST_PATH }}
+
+          echo "Updated image:"
+          grep "image:" ${{ env.PROD_MANIFEST_PATH }}
+
+      - name: Commit and push config changes
+        run: |
+          cd team5-config
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add ${{ env.PROD_MANIFEST_PATH }}
+
+          git commit -m "chore: update prod image tag to ${{ github.sha }}" || echo "No changes to commit"
+          git push origin ${{ env.CONFIG_REPO_BRANCH }}

@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/pets")
@@ -62,5 +66,16 @@ public class PetController {
     @DeleteMapping("/{petId}")
     public void delete(@PathVariable Long petId) {
         petService.delete(petId);
+    }
+    
+    // 이미지 조회 API 추가
+    @GetMapping("/images/{filename:.+}")
+    public ResponseEntity<byte[]> findImage(@PathVariable String filename) {
+        PetImageService.PetImageFile image = petService.findImage(filename);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CACHE_CONTROL, "max-age=3600")
+                .contentType(MediaType.parseMediaType(image.contentType()))
+                .body(image.bytes());
     }
 }

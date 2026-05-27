@@ -41,6 +41,11 @@ public class PetService {
 
         return PetResponse.from(pet);
     }
+    
+    @Transactional(readOnly = true)
+    public PetImageService.PetImageFile findImage(String filename) {
+        return petImageService.load(filename);
+    }
 
     @Transactional
     public PetResponse update(Long petId, PetCreateRequest request) {
@@ -52,22 +57,19 @@ public class PetService {
         return PetResponse.from(pet);
     }
 
-     @Transactional
+    @Transactional
     public PetResponse uploadImage(Long petId, MultipartFile image) {
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new IllegalArgumentException("반려동물을 찾을 수 없습니다. petId=" + petId));
 
-        // 기존 이미지 삭제
         petImageService.delete(pet.getImageUrl());
 
-        // 새 이미지 저장
         String imageUrl = petImageService.save(image);
         pet.updateImageUrl(imageUrl);
 
         return PetResponse.from(pet);
     }
 
-    // 이미지 삭제 메서드 추가
     @Transactional
     public PetResponse deleteImage(Long petId) {
         Pet pet = petRepository.findById(petId)
@@ -84,7 +86,7 @@ public class PetService {
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new IllegalArgumentException("반려동물을 찾을 수 없습니다. petId=" + petId));
 
-        petImageService.delete(pet.getImageUrl()); // 이미지 먼저 삭제
-        petRepository.deleteById(petId);           // 그 다음 DB 삭제
+        petImageService.delete(pet.getImageUrl());
+        petRepository.deleteById(petId);
     }
 }

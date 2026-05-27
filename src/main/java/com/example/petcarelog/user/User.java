@@ -1,16 +1,15 @@
 package com.example.petcarelog.user;
 
+import com.example.petcarelog.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +27,6 @@ public class User {
     @Column(nullable = false, length = 20)
     private String role;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    private LocalDateTime updatedAt;
-
     public static User create(String email, String password, String nickname, String role) {
         User user = new User();
         user.email = email;
@@ -43,5 +36,3 @@ public class User {
         return user;
     }
 }
-
-

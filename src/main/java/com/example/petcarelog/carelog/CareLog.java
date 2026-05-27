@@ -1,5 +1,6 @@
 package com.example.petcarelog.carelog;
 
+import com.example.petcarelog.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "care_logs")
-public class CareLog { 
+public class CareLog extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,12 +43,6 @@ public class CareLog {
 
     @Column(name = "recorded_at", nullable = false)
     private LocalDateTime recordedAt;
-
-    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime updatedAt;
 
     public CareLog(Long petId, Long presetId, Long userId, String careName, String category, String icon, String color, String memo, LocalDateTime recordedAt) {
         this.petId = petId;

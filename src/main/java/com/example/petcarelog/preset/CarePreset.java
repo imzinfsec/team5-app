@@ -1,22 +1,20 @@
 package com.example.petcarelog.preset;
 
+import com.example.petcarelog.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "care_presets")
-public class CarePreset {
+public class CarePreset extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 기본 프리셋은 null, 사용자 추가 프리셋은 userId 값 사용
     @Column(name = "user_id")
     private Long userId;
 
@@ -40,12 +38,6 @@ public class CarePreset {
 
     @Column(name = "sort_order", nullable = false)
     private Integer sortOrder;
-
-    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime updatedAt;
 
     public CarePreset(Long userId, String name, String category, String icon, String color, Boolean defaultPreset, Integer sortOrder) {
         this.userId = userId;

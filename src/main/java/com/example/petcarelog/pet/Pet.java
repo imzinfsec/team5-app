@@ -1,17 +1,17 @@
 package com.example.petcarelog.pet;
 
+import com.example.petcarelog.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "pets")
-public class Pet {
+public class Pet extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +30,7 @@ public class Pet {
     private LocalDate birthDate;
 
     @Column(name = "image_url", length = 500)
-    private String imageUrl; 
-    
-    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime updatedAt;
+    private String imageUrl;
 
     public Pet(Long userId, String name, String species, LocalDate birthDate) {
         this.userId = userId;
@@ -51,8 +45,7 @@ public class Pet {
         this.birthDate = birthDate;
     }
 
-     // 이미지 URL 업데이트 메서드 추가
-    public void updateImageUrl(String imageUrl) {   // ← 추가
+    public void updateImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 }

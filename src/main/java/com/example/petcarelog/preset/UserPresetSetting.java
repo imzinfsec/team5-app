@@ -1,16 +1,15 @@
 package com.example.petcarelog.preset;
 
+import com.example.petcarelog.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "user_preset_settings")
-public class UserPresetSetting {
+public class UserPresetSetting extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +23,6 @@ public class UserPresetSetting {
 
     @Column(name = "is_tracked", nullable = false)
     private Boolean tracked;
-
-    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime updatedAt;
 
     public UserPresetSetting(Long userId, Long presetId, Boolean tracked) {
         this.userId = userId;

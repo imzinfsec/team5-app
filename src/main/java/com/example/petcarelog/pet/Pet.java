@@ -29,6 +29,9 @@ public class Pet {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
+    @Column(name = "image_url", length = 500)
+    private String imageUrl; 
+    
     @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -46,5 +49,10 @@ public class Pet {
         this.name = name;
         this.species = species;
         this.birthDate = birthDate;
+    }
+
+     // 이미지 URL 업데이트 메서드 추가
+    public void updateImageUrl(String imageUrl) {   // ← 추가
+        this.imageUrl = imageUrl;
     }
 }

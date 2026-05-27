@@ -16,9 +16,9 @@ public class PresetService {
     private final UserPresetSettingRepository userPresetSettingRepository;
 
     @Transactional
-    public PresetResponse create(PresetCreateRequest request) {
+    public PresetResponse create(Long userId, PresetCreateRequest request) {
         CarePreset preset = new CarePreset(
-                request.userId(),
+                userId,
                 request.name(),
                 request.category(),
                 request.icon(),
@@ -30,7 +30,7 @@ public class PresetService {
         CarePreset savedPreset = presetRepository.save(preset);
 
         UserPresetSetting setting = new UserPresetSetting(
-                request.userId(),
+                userId,
                 savedPreset.getId(),
                 false
         );
@@ -74,7 +74,7 @@ public class PresetService {
     }
 
     @Transactional
-    public PresetResponse update(Long presetId, PresetCreateRequest request) {
+    public PresetResponse update(Long userId, Long presetId, PresetCreateRequest request) {
         CarePreset preset = presetRepository.findById(presetId)
                 .orElseThrow(() -> new IllegalArgumentException("프리셋을 찾을 수 없습니다. presetId=" + presetId));
 
@@ -87,7 +87,7 @@ public class PresetService {
         );
 
         Boolean tracked = userPresetSettingRepository
-                .findByUserIdAndPresetId(request.userId(), presetId)
+                .findByUserIdAndPresetId(userId, presetId)
                 .map(UserPresetSetting::getTracked)
                 .orElse(false);
 

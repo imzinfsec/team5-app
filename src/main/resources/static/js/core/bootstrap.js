@@ -8,7 +8,7 @@ function renderAll() {
 }
 
 async function loadInitialData() {
-  const petsResponse = await api('/pets?userId=1');
+  const petsResponse = await api('/pets');
 
   const pets = normalizeApiList(petsResponse);
 
@@ -16,8 +16,9 @@ async function loadInitialData() {
     id: p.id,
     name: p.name,
     species: p.species,
-    birth: p.birthDate || 'unknown'
-  }));
+    birth: p.birthDate || 'unknown',
+    imageUrl: p.imageUrl || null      // ← 이 줄 추가
+}));
 
   state.currentPetId = state.pets[0]?.id || null;
 
@@ -29,7 +30,7 @@ async function loadInitialData() {
 }
 
 async function loadPresets() {
-  const presetsResponse = await api('/presets?userId=1');
+  const presetsResponse = await api('/presets');
   const presets = normalizeApiList(presetsResponse);
 
   state.presets = presets.map(p => ({
@@ -48,11 +49,7 @@ async function loadLogsForSelectedDate() {
   }
 
   const date = getSelectedDateString();
-
-  const logsResponse = await api(
-    `/pets/${state.currentPetId}/care-logs?date=${date}`
-  );
-
+  const logsResponse = await api(`/pets/${state.currentPetId}/care-logs?date=${date}`);
   const logs = normalizeApiList(logsResponse);
 
   state.logs = logs.map(l => {

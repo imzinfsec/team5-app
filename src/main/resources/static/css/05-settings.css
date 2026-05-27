@@ -1,58 +1,98 @@
-.profile-card { padding: 15px; display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }
-    .avatar {
-      width: 66px;
-      height: 66px;
-      border-radius: 24px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, #f0ede8, #ddd7cf);
-      color: #fff;
-      font-size: 22px;
-      font-weight: 950;
-    }
-    .profile-card h2 { margin: 0; font-size: 21px; letter-spacing: -0.055em; }
-    .profile-card p { margin: 6px 0 0; color: var(--sub); font-size: 13px; }
-    .profile-edit {
-      margin-left: auto;
-      height: 36px;
-      padding: 0 13px;
-      border-radius: 999px;
-      background: #f4eee7;
-      color: #68707c;
-      font-size: 13px;
-      font-weight: 900;
-    }
-    .pet-switch { display: flex; gap: 10px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; }
-    .pet-switch::-webkit-scrollbar { display: none; }
-    .pet-card {
-      min-width: 78px;
-      padding: 10px 8px;
-      border-radius: 22px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      display: grid;
-      justify-items: center;
-      gap: 7px;
-      color: #59616c;
-      font-size: 13px;
-      font-weight: 850;
-    }
-    .pet-card.active { border-color: var(--pink); color: var(--text); box-shadow: 0 8px 18px rgba(45,41,36,0.06); }
-    .pet-card .avatar { width: 48px; height: 48px; border-radius: 18px; font-size: 17px; }
+/* 프로필 카드 */
+.profile-card {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #f0ede8, #ddd7cf);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 950;
+  overflow: hidden;       /* 이미지가 넘치지 않도록 */
+  flex-shrink: 0;
+}
 
-    .menu { overflow: hidden; }
-    .menu button {
-      width: 100%;
-      min-height: 58px;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-      font-weight: 850;
-      letter-spacing: -0.04em;
-      text-align: left;
-    }
-    .menu button:last-child { border-bottom: 0; }
-    .menu-left { display: flex; align-items: center; gap: 12px; }
-    .menu-icon { width: 34px; height: 34px; border-radius: 12px; --c: var(--green-dark); --t: #eef6e8; }
+/* 반려동물 사진이 있을 때 avatar 안 이미지 스타일 */
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* 이미지 비율 유지하며 채우기 */
+  border-radius: 24px;
+}
+
+.profile-card h2 { margin: 0; font-size: 21px; letter-spacing: -0.055em; }
+.profile-card p { margin: 6px 0 0; color: var(--sub); font-size: 13px; }
+.profile-edit {
+  margin-left: auto;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #f4eee7;
+  color: #68707c;
+  font-size: 13px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* 반려동물 스위처 */
+.pet-switch {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 0 10px;
+  scrollbar-width: none;
+}
+.pet-switch::-webkit-scrollbar { display: none; }
+.pet-card {
+  min-width: 82px;
+  padding: 11px 8px;
+  border-radius: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  color: #59616c;
+  font-size: 13px;
+  font-weight: 850;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.pet-card.active {
+  border-color: var(--pink);
+  color: var(--text);
+  box-shadow: 0 8px 20px rgba(45,41,36,0.08);
+}
+.pet-card .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 18px;
+  font-size: 17px;
+}
+
+/* 메뉴 */
+.menu { overflow: hidden; }
+.menu button {
+  width: 100%;
+  min-height: 58px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  text-align: left;
+  transition: background 0.1s;
+}
+.menu button:active { background: var(--soft); }
+.menu button:last-child { border-bottom: 0; }
+.menu-left { display: flex; align-items: center; gap: 12px; }
+.menu-icon { width: 34px; height: 34px; border-radius: 12px; --c: var(--green-dark); --t: #eef6e8; }

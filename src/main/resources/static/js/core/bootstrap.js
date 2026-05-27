@@ -8,7 +8,8 @@ function renderAll() {
 }
 
 async function loadInitialData() {
-  const petsResponse = await api('/pets?userId=1');
+  const petsResponse = await api('/pets');
+
   const pets = normalizeApiList(petsResponse);
 
   state.pets = pets.map(p => ({
@@ -29,7 +30,7 @@ async function loadInitialData() {
 }
 
 async function loadPresets() {
-  const presetsResponse = await api('/presets?userId=1');
+  const presetsResponse = await api('/presets');
   const presets = normalizeApiList(presetsResponse);
 
   state.presets = presets.map(p => ({

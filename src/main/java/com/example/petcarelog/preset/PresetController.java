@@ -1,7 +1,9 @@
 package com.example.petcarelog.preset;
 
+import com.example.petcarelog.user.CurrentUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,30 +14,40 @@ import java.util.List;
 public class PresetController {
 
     private final PresetService presetService;
+    private final CurrentUserService currentUserService;
 
     @PostMapping
-    public PresetResponse create(@Valid @RequestBody PresetCreateRequest request) {
-        return presetService.create(request);
+    public PresetResponse create(
+            Authentication authentication,
+            @Valid @RequestBody PresetCreateRequest request
+    ) {
+        Long userId = currentUserService.getCurrentUserId(authentication);
+        return presetService.create(userId, request);
     }
 
     @GetMapping
     public List<PresetResponse> findAll(
-            @RequestParam Long userId,
+            Authentication authentication,
             @RequestParam(required = false) String category
     ) {
+        Long userId = currentUserService.getCurrentUserId(authentication);
         return presetService.findAll(userId, category);
     }
 
     @PutMapping("/tracking")
-    public void updateTracking(@Valid @RequestBody TrackingUpdateRequest request) {
-        presetService.updateTracking(request.userId(), request.presetIds());
+    public void updateTracking(
+            Authentication authentication,
+            @Valid @RequestBody TrackingUpdateRequest request
+    ) {
+        Long userId = currentUserService.getCurrentUserId(authentication);
+        presetService.updateTracking(userId, request.presetIds());
     }
 
     @DeleteMapping("/{presetId}")
     public void delete(@PathVariable Long presetId) {
         presetService.delete(presetId);
     }
-    
+
     @GetMapping("/{presetId}")
     public PresetResponse findOne(@PathVariable Long presetId) {
         return presetService.findOne(presetId);
@@ -43,9 +55,11 @@ public class PresetController {
 
     @PutMapping("/{presetId}")
     public PresetResponse update(
+            Authentication authentication,
             @PathVariable Long presetId,
             @Valid @RequestBody PresetCreateRequest request
     ) {
-        return presetService.update(presetId, request);
+        Long userId = currentUserService.getCurrentUserId(authentication);
+        return presetService.update(userId, presetId, request);
     }
 }

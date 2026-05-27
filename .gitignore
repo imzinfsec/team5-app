@@ -273,3 +273,27 @@ languageServers-log/
 src/main/resources/application-local.yaml
 
 uploads/
+# =========================
+# Local Database (H2 Database)
+# =========================
+*.mv.db
+*.trace.db
+
+# =========================
+# Local Docker / DB Data Volumes
+# =========================
+/data/
+/db-data/
+/.mysql/
+/.postgres/
+
+# =========================
+# Security & Cloud Credentials
+# =========================
+.aws/
+*.pem
+*.key
+*.p12
+*.jks
+credentials
+credentials.json

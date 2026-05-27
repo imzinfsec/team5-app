@@ -1,0 +1,57 @@
+# =========================
+# Git & CI/CD
+# =========================
+.git
+.gitignore
+.github/
+
+# =========================
+# Build Outputs & Maven Wrapper
+# =========================
+# 컨테이너 안에서 직접 빌드할 것이므로 로컬 빌드 결과물은 철저히 무시합니다.
+target/
+build/
+out/
+
+# 공식 Maven 이미지를 사용하므로 로컬의 Maven Wrapper도 필요 없습니다.
+.mvn/
+mvnw
+mvnw.cmd
+
+# =========================
+# IDE Settings
+# =========================
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# =========================
+# Secrets & Local Configs
+# =========================
+# 컨테이너 내부로 민감한 정보가 복사되는 것을 원천 차단합니다.
+.env
+*.pem
+*.jks
+*.key
+src/main/resources/application-local.yml
+src/main/resources/application-local.yaml
+src/main/resources/application-secret.yml
+src/main/resources/application-secret.yaml
+
+# =========================
+# OS specific files
+# =========================
+.DS_Store
+Thumbs.db
+*.log
+
+# =========================
+# Docker
+# =========================
+# 도커 관련 파일 자체도 이미지 안에는 들어갈 필요가 없습니다.
+Dockerfile
+.dockerignore
+docker-compose.yml

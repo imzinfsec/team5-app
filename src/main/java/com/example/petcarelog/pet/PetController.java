@@ -1,7 +1,9 @@
 package com.example.petcarelog.pet;
 
+import com.example.petcarelog.user.CurrentUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
@@ -12,14 +14,20 @@ import java.util.List;
 public class PetController {
 
     private final PetService petService;
+    private final CurrentUserService currentUserService;
 
     @PostMapping
-    public PetResponse create(@Valid @RequestBody PetCreateRequest request) {
-        return petService.create(request);
+    public PetResponse create(
+            Authentication authentication,
+            @Valid @RequestBody PetCreateRequest request
+    ) {
+        Long userId = currentUserService.getCurrentUserId(authentication);
+        return petService.create(userId, request);
     }
 
     @GetMapping
-    public List<PetResponse> findAll(@RequestParam Long userId) {
+    public List<PetResponse> findAll(Authentication authentication) {
+        Long userId = currentUserService.getCurrentUserId(authentication);
         return petService.findAll(userId);
     }
 

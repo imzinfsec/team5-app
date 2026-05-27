@@ -2,7 +2,10 @@ function renderTracker() {
   document.querySelector('#trackerPetTitle').textContent =
     `${pet()?.name || '반려동물'} 루틴`;
 
-  document.querySelector('#trackerRange').textContent = getWeekRangeText();
+  const weekRangeText = getWeekRangeText();
+
+  document.querySelector('#trackerRange').textContent = weekRangeText;
+  document.querySelector('#trackerHeroRange').textContent = weekRangeText;
 
   const tracked = state.presets.filter(p => p.tracked);
   const weekDates = getTodayWeekDates();

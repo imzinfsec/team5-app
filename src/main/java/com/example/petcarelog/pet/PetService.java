@@ -14,9 +14,9 @@ public class PetService {
     private final PetImageService petImageService;
 
     @Transactional
-    public PetResponse create(PetCreateRequest request) {
+    public PetResponse create(Long userId, PetCreateRequest request) {
         Pet pet = new Pet(
-                request.userId(),
+                userId,
                 request.name(),
                 request.species(),
                 request.birthDate()

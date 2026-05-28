@@ -29,7 +29,11 @@ public class SecurityConfig {
                                 "/js/**",
                                 "/images/**",
                                 "/favicon.ico",
-                                "/actuator/health"
+
+                                // Actuator endpoints for health check and monitoring
+                                "/actuator/health",
+                                "/actuator/info",
+                                "/actuator/prometheus"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -46,7 +50,8 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login.html?logout=true")
                         .invalidateHttpSession(true)
-                        .deleteCookies("SESSION")
+                        .clearAuthentication(true)
+                        .deleteCookies("SESSION", "JSESSIONID")
                 );
 
         return http.build();

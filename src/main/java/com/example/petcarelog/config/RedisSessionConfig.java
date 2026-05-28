@@ -11,6 +11,6 @@ public class RedisSessionConfig {
 
     @Bean
     public ConfigureRedisAction configureRedisAction() {
-        return ConfigureRedisAction.NO_OP;
+        return ConfigureRedisAction.NO_OP; 
     }
 }

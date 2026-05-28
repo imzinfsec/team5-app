@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "care_logs")
-public class CareLog extends BaseTimeEntity {
+public class CareLog extends BaseTimeEntity { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

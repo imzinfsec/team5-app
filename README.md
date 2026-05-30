@@ -25,7 +25,7 @@ PetCareLog는 반려동물 보호자가 매일 반복되는 돌봄 활동을 간
 
 | 메인 화면(돌봄 기록) | 반려동물 관리 및 설정 |
 |---|---|
-| ![메인 화면](docs/images/home.png) | ![반려동물 관리 및 설정](docs/images/settings.png) |
+| ![메인 화면](docs/images/home.png) | ![반려동물 관리 및 설정](docs/images/pet-manage.png) |
 
 | 반려동물 추가 | 반려동물 수정 |
 |---|---|

@@ -33,7 +33,7 @@ PetCareLog는 반려동물 보호자가 매일 반복되는 돌봄 활동을 간
 
 | 프리셋 관리 | 프리셋 추가 | 프리셋 수정/삭제 |
 |---|---|---|
-| ![프리셋 관리](docs/images/presets.png) | ![프리셋 추가](docs/images/edit-presets.png) | ![프리셋 수정/삭제](docs/images/edit-presets.png) |
+| ![프리셋 관리](docs/images/presets.png) | ![프리셋 추가](docs/images/add-presets.png) | ![프리셋 수정/삭제](docs/images/edit-presets.png) |
 
 | 주간 트래커  | 주간 트래킹 선택 |
 |---|---|

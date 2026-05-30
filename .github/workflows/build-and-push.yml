@@ -10,10 +10,20 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: ${{ vars.AWS_REGION }}
-  ECR_PROD_REPOSITORY: ${{ vars.ECR_PROD_REPOSITORY }}
+# 여기서 직접 ap-northeast-2를 박아버리면 변수 로딩 에러를 우회할 수 있습니다. 하드코딩
+  AWS_REGION: ap-northeast-2 
+  ECR_PROD_REPOSITORY: team5-petcarelog-dev
+  # AWS_REGION: ${{ vars.AWS_REGION }}
+  # ECR_PROD_REPOSITORY: ${{ vars.ECR_PROD_REPOSITORY }}
 
-  CONFIG_REPO: CLD-05/team5-config
+  # CONFIG_REPO: CLD-05/team5-config
+  # CONFIG_REPO_BRANCH: main
+  # PROD_MANIFEST_PATH: apps/petcarelog/overlays/prod/patch-deployment.yaml
+  # AWS_REGION: ${{ vars.AWS_REGION }}
+  # ECR_PROD_REPOSITORY: ${{ vars.ECR_PROD_REPOSITORY }}
+
+  # 팀 공용에서 대장님 개인 레포지토리로 타겟 변경
+  CONFIG_REPO: imzinfsec/team5-config
   CONFIG_REPO_BRANCH: main
   PROD_MANIFEST_PATH: apps/petcarelog/overlays/prod/patch-deployment.yaml
 
